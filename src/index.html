@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <title>Transcribe</title>
+        <link rel="stylesheet" href="style.css" type="text/css">
+        <script src="index.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            OpenAI API key:
+            <input type="text" id="api-key" placeholder="sk-xxxx">
+            <div class="disclaimer">The API key is only sent to Open AI directly. It is saved to your browser's localStorage.</div>
+            <div id="start-view">
+                Start by <a href="https://platform.openai.com/account/api-keys" target="_blank">getting an API key</a> from OpenAI.
+                <div class="disclaimer">OpenAI documentation says "Do not share your API key with others, or expose it in the browser or other client-side code." This means that if you are <strong>building</strong> a web app, you should not leak the service's API key to your users.</div>
+            </div>
+            <form id="upload-form">
+                <label for="audio-file">Choose an audio file:</label>
+                <input type="file" id="audio-file" name="file">
+                <br>
+                <button type="submit">Upload and transcribe</button>
+              </form>
+            <div id="output"></div>
+        </div>
+    </body>
+</html>

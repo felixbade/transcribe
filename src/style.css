@@ -1,0 +1,116 @@
+:root {
+    --bg: white;
+    --fg: black;
+    --my-message-bg: hsl(215, 90%, 50%);
+    --my-message-fg: white;
+    --response-bg: hsl(0, 0%, 90%);
+    --link: hsl(220, 80%, 50%);
+    --input-border: hsla(0, 0%, 0%, 20%);
+    --info: hsl(120, 50%, 80%);
+    --info-link: hsl(210, 100%, 30%);
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    line-height: 130%;
+    background-color: var(--bg);
+    color: var(--fg);
+    margin-bottom: calc(4em + env(safe-area-inset-bottom));
+}
+
+.container {
+    max-width: 30em;
+    margin: 0 auto;
+    padding: 0.7em 1em;
+}
+
+#start-view {
+    background-color: var(--info);
+    padding: 1em;
+    border-radius: 1em;
+    display: inline-block;
+    margin: 1em 0;
+    font-size: 1.1em;
+}
+
+#start-view a {
+    color: var(--info-link);
+    text-decoration: underline;
+}
+
+#upload-form {
+    margin: 2em 0;
+}
+
+input {
+    font-size: 16px;
+}
+
+
+br {
+    line-height: 200%;
+}
+
+a, a:visited {
+    text-decoration: none;
+    color: var(--link);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.disclaimer {
+    font-size: 0.7em;
+    line-height: 130%;
+    margin: 0.35em 0;
+}
+
+footer {
+    margin-top: 10px;
+    font-size: 0.7em;
+    opacity: 70%;
+}
+
+input[type=text], textarea {
+    font-family: -apple-system, sans-serif;
+    line-height: 120%;
+    background-color: var(--bg);
+    color: var(--fg);
+    border: 2px solid var(--input-border);
+    padding: 0.2em 0.5em;
+    border-radius: 1em;
+}
+
+textarea {
+    resize: none;
+    height: auto;
+}
+
+button {
+    background-color: var(--my-message-bg);
+    color: var(--my-message-fg);
+    border: none;
+    padding: 0.5em 0.8em;
+    border-radius: 19px;
+    font-size: 1em;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: hsl(215, 20%, 10%);
+        --fg: hsl(0, 0%, 95%);
+        --my-message-bg: hsl(215, 70%, 50%);
+        --my-message-fg: white;
+        --response-bg: hsl(215, 15%, 22%);
+        --link: hsl(220, 75%, 55%);
+        --input-border: hsla(0, 0%, 90%, 40%);
+        --info: hsl(130, 30%, 25%);
+        --info-link: hsl(220, 100%, 85%);
+    }
+}
