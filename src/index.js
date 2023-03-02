@@ -1,11 +1,12 @@
 const url = 'https://api.openai.com/v1/audio/transcriptions';
 
 
-const transcribe = (apiKey, file) => {
+const transcribe = (apiKey, file, language) => {
     const formData = new FormData()
     formData.append('file', file)
     formData.append('model', 'whisper-1')
     formData.append('response_format', 'verbose_json')
+    formData.append('language', language)
 
     const headers = new Headers()
     headers.append('Authorization', `Bearer ${apiKey}`)
@@ -87,7 +88,8 @@ window.addEventListener('load', () => {
 
         const apiKey = localStorage.getItem('api-key')
         const file = fileInput.files[0]
-        const response = transcribe(apiKey, file)
+        const language = document.querySelector('#language').value
+        const response = transcribe(apiKey, file, language)
 
         response.then(transcription => {
             setTranscribedSegments(transcription.segments)
