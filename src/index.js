@@ -42,7 +42,7 @@ const updateTextareaSize = (element) => {
     element.style.height = `${height}px`
 }
 
-const handleTranscribedText = (text) => {
+const setTranscribedText = (text) => {
     const element = document.querySelector('#output')
     element.innerText = text
 }
@@ -53,7 +53,7 @@ window.addEventListener('load', () => {
     document.querySelector('#upload-form').addEventListener('submit', event => {
         event.preventDefault()
 
-        handleTranscribedText('Transcribing...')
+        setTranscribedText('Transcribing...')
 
         const formData = new FormData(event.target)
         formData.append('model', 'whisper-1')
@@ -67,7 +67,7 @@ window.addEventListener('load', () => {
             body: formData,
             headers: headers
         }).then(response => response.json())
-          .then(data => handleTranscribedText(data.text))
+          .then(data => setTranscribedText(data.text))
           .catch(error => console.error(error))
     })
 })
