@@ -1,6 +1,24 @@
 const url = 'https://api.openai.com/v1/audio/transcriptions';
 
 
+const transcribe = (apiKey, file) => {
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('model', 'whisper-1')
+
+    const headers = new Headers()
+    headers.append('Authorization', `Bearer ${apiKey}`)
+
+    return fetch(url, {
+        method: 'POST',
+        body: formData,
+        headers: headers
+    }).then(response => response.json())
+      .then(data => data.text)
+      .catch(error => console.error(error))
+}
+
+
 const hideStartView = () => {
     document.querySelector('#start-view').classList.add('hidden')
 }
@@ -55,22 +73,11 @@ window.addEventListener('load', () => {
         setTranscribedText('Transcribing...')
 
         const apiKey = localStorage.getItem('api-key')
-
         const file = fileInput.files[0]
+        const response = transcribe(apiKey, file)
 
-        const formData = new FormData()
-        formData.append('file', file)
-        formData.append('model', 'whisper-1')
-
-        const headers = new Headers()
-        headers.append('Authorization', `Bearer ${apiKey}`)
-
-        fetch(url, {
-            method: 'POST',
-            body: formData,
-            headers: headers
-        }).then(response => response.json())
-          .then(data => setTranscribedText(data.text))
-          .catch(error => console.error(error))
+        response.then(transcription => {
+            setTranscribedText(transcription)
+        })
     })
 })
