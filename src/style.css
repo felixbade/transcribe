@@ -111,6 +111,10 @@ label.button {
     display: none !important;
 }
 
+.segment {
+    margin: 1em 0;
+}
+
 @media (prefers-color-scheme: dark) {
     :root {
         --bg: hsl(215, 20%, 10%);

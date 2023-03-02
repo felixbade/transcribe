@@ -5,6 +5,7 @@ const transcribe = (apiKey, file) => {
     const formData = new FormData()
     formData.append('file', file)
     formData.append('model', 'whisper-1')
+    formData.append('response_format', 'verbose_json')
 
     const headers = new Headers()
     headers.append('Authorization', `Bearer ${apiKey}`)
@@ -14,7 +15,6 @@ const transcribe = (apiKey, file) => {
         body: formData,
         headers: headers
     }).then(response => response.json())
-      .then(data => data.text)
       .catch(error => console.error(error))
 }
 
@@ -61,8 +61,21 @@ const updateTextareaSize = (element) => {
 }
 
 const setTranscribedText = (text) => {
-    const element = document.querySelector('#output')
-    element.innerText = text
+    const container = document.querySelector('#output')
+    container.innerHTML = text
+}
+
+const setTranscribedSegments = (segments) => {
+    console.log(segments)
+
+    const container = document.querySelector('#output')
+    container.innerHTML = ''
+    for (const segment of segments) {
+        const element = document.createElement('div')
+        element.classList.add('segment')
+        element.innerText = segment.text
+        container.appendChild(element)
+    }
 }
 
 window.addEventListener('load', () => {
@@ -77,7 +90,7 @@ window.addEventListener('load', () => {
         const response = transcribe(apiKey, file)
 
         response.then(transcription => {
-            setTranscribedText(transcription)
+            setTranscribedSegments(transcription.segments)
         })
     })
 })
