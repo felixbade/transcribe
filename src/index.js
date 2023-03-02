@@ -53,6 +53,8 @@ window.addEventListener('load', () => {
     document.querySelector('#upload-form').addEventListener('submit', event => {
         event.preventDefault()
 
+        handleTranscribedText('Transcribing...')
+
         const formData = new FormData(event.target)
         formData.append('model', 'whisper-1')
 
