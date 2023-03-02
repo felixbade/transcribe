@@ -50,15 +50,18 @@ const setTranscribedText = (text) => {
 window.addEventListener('load', () => {
     setupAPIKeyInput()
 
-    document.querySelector('#upload-form').addEventListener('submit', event => {
-        event.preventDefault()
-
+    const fileInput = document.querySelector('#audio-file')
+    fileInput.addEventListener('change', () => {
         setTranscribedText('Transcribing...')
 
-        const formData = new FormData(event.target)
+        const apiKey = localStorage.getItem('api-key')
+
+        const file = fileInput.files[0]
+
+        const formData = new FormData()
+        formData.append('file', file)
         formData.append('model', 'whisper-1')
 
-        const apiKey = localStorage.getItem('api-key')
         const headers = new Headers()
         headers.append('Authorization', `Bearer ${apiKey}`)
 
