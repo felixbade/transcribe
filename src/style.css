@@ -97,6 +97,16 @@ button {
     font-size: 1em;
 }
 
+label.button {
+    display: inline-block;
+    background-color: var(--my-message-bg);
+    color: var(--my-message-fg);
+    border: none;
+    padding: 0.5em 0.8em;
+    border-radius: 19px;
+    font-size: 1em;
+}
+
 .hidden {
     display: none !important;
 }
