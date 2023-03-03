@@ -6,7 +6,9 @@ const transcribe = (apiKey, file, language) => {
     formData.append('file', file)
     formData.append('model', 'whisper-1')
     formData.append('response_format', 'verbose_json')
-    formData.append('language', language)
+    if (language) {
+        formData.append('language', language)
+    }
 
     const headers = new Headers()
     headers.append('Authorization', `Bearer ${apiKey}`)
