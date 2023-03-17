@@ -1,7 +1,7 @@
 const url = 'https://api.openai.com/v1/audio/transcriptions';
 
 
-const transcribe = (apiKey, file, language) => {
+const transcribe = (apiKey, file, language, response_format) => {
     const formData = new FormData()
     formData.append('file', file)
     formData.append('model', 'whisper-1')
