@@ -82,7 +82,7 @@ const setTranscribingMessage = (text) => {
     outputElement.innerHTML = text
 }
 
-const setTranscribedTextBasedFormats = (text) => {
+const setTranscribedPlainText = (text) => {
     console.log(text)
     outputElement.innerHTML = '<pre>' + text + '</pre>' // Wrap the content in a <pre> tag
 }
@@ -116,7 +116,7 @@ window.addEventListener('load', () => {
             if (response_format === 'verbose_json') {
                 setTranscribedSegments(transcription.segments)
             } else {
-                setTranscribedTextBasedFormats(transcription)
+                setTranscribedPlainText(transcription)
             }
             fileInput.value = null; // Clear the file input
         })
