@@ -20,13 +20,9 @@ const transcribe = (apiKey, file, language, response_format) => {
         console.log(response)
         // Automatically handle response format
         if (response_format === 'json' || response_format === 'verbose_json') {
-            return response.json().then(data => {
-                return data
-            })
+            return response.json()
         } else {
-            return response.text().then(data => {
-                return data
-            })
+            return response.text()
         }
     }).catch(error => console.error(error))
 }
