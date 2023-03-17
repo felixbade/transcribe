@@ -122,6 +122,7 @@ window.addEventListener('load', () => {
             } else {
                 setTranscribedTextBasedFormats(transcription);
             }
+            fileInput.value = null; // Clear the file input
         });
     });    
 })
