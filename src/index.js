@@ -115,9 +115,7 @@ window.addEventListener('load', () => {
         const response = transcribe(apiKey, file, language, response_format)
 
         response.then(transcription => {
-            if (response_format === 'json') {
-                setTranscribedTextBasedFormats(transcription.text)
-            } else if (response_format === 'verbose_json') {
+            if (response_format === 'verbose_json') {
                 setTranscribedSegments(transcription.segments)
             } else {
                 setTranscribedTextBasedFormats(transcription)
