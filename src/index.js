@@ -21,12 +21,10 @@ const transcribe = (apiKey, file, language, response_format) => {
         // Automatically handle response format
         if (response_format === 'json' || response_format === 'verbose_json') {
             return response.json().then(data => {
-                console.log("JSON: ", JSON.stringify(data, null, 2))
                 return data
             })
         } else {
             return response.text().then(data => {
-                console.log("TEXT: ", data)
                 return data
             })
         }
@@ -82,8 +80,6 @@ const setTranscribingMessage = (text) => {
 }
 
 const setTranscribedPlainText = (text) => {
-    console.log(text)
-
     // outputElement.innerText creates unnecessary <br> elements
     text = text.replaceAll('&', '&amp;')
     text = text.replaceAll('<', '&lt;')
@@ -92,8 +88,6 @@ const setTranscribedPlainText = (text) => {
 }
 
 const setTranscribedSegments = (segments) => {
-    console.log(segments)
-
     outputElement.innerHTML = ''
     for (const segment of segments) {
         const element = document.createElement('div')
