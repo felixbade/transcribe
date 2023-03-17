@@ -106,14 +106,14 @@ window.addEventListener('load', () => {
 
     const fileInput = document.querySelector('#audio-file')
     fileInput.addEventListener('change', () => {
-        setTranscribedTextBasedFormats('Transcribing...');
-    
+        setTranscribingMessage('Transcribing...');
+
         const apiKey = localStorage.getItem('api-key');
         const file = fileInput.files[0];
         const language = document.querySelector('#language').value;
         const response_format = document.querySelector('#response_format').value;
         const response = transcribe(apiKey, file, language, response_format);
-    
+
         response.then(transcription => {
             if (response_format === 'json') {
                 setTranscribedTextBasedFormats(transcription.text);
@@ -124,5 +124,5 @@ window.addEventListener('load', () => {
             }
             fileInput.value = null; // Clear the file input
         });
-    });    
+    });
 })
