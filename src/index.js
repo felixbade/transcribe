@@ -76,28 +76,26 @@ const updateTextareaSize = (element) => {
     element.style.height = `${height}px`
 }
 
+const outputElement = document.querySelector('#output')
+
 const setTranscribingMessage = (text) => {
-    const container = document.querySelector('#output')
-    container.innerHTML = text
+    outputElement.innerHTML = text
 }
 
 const setTranscribedTextBasedFormats = (text) => {
     console.log(text)
-
-    const container = document.querySelector('#output')
-    container.innerHTML = '<pre>' + text + '</pre>' // Wrap the content in a <pre> tag
+    outputElement.innerHTML = '<pre>' + text + '</pre>' // Wrap the content in a <pre> tag
 }
 
 const setTranscribedSegments = (segments) => {
     console.log(segments)
 
-    const container = document.querySelector('#output')
-    container.innerHTML = ''
+    outputElement.innerHTML = ''
     for (const segment of segments) {
         const element = document.createElement('div')
         element.classList.add('segment')
         element.innerText = segment.text
-        container.appendChild(element)
+        outputElement.appendChild(element)
     }
 }
 
