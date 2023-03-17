@@ -76,7 +76,7 @@ const updateTextareaSize = (element) => {
     element.style.height = `${height}px`
 }
 
-const outputElement = document.querySelector('#output')
+let outputElement
 
 const setTranscribingMessage = (text) => {
     outputElement.innerHTML = text
@@ -101,6 +101,8 @@ const setTranscribedSegments = (segments) => {
 
 window.addEventListener('load', () => {
     setupAPIKeyInput()
+    outputElement = document.querySelector('#output')
+
 
     const fileInput = document.querySelector('#audio-file')
     fileInput.addEventListener('change', () => {
