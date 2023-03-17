@@ -1,4 +1,4 @@
-const url = 'https://api.openai.com/v1/audio/transcriptions';
+const url = 'https://api.openai.com/v1/audio/transcriptions'
 
 
 const transcribe = (apiKey, file, language, response_format) => {
@@ -22,14 +22,14 @@ const transcribe = (apiKey, file, language, response_format) => {
         // Automatically handle response format
         if (response_format === 'json' || response_format === 'verbose_json') {
             return response.json().then(data => {
-                console.log("JSON: ", JSON.stringify(data, null, 2));
-                return data;
-            });
+                console.log("JSON: ", JSON.stringify(data, null, 2))
+                return data
+            })
         } else {
             return response.text().then(data => {
-                console.log("TEXT: ", data);
-                return data;
-            });
+                console.log("TEXT: ", data)
+                return data
+            })
         }
     }).catch(error => console.error(error))
 }
@@ -106,23 +106,23 @@ window.addEventListener('load', () => {
 
     const fileInput = document.querySelector('#audio-file')
     fileInput.addEventListener('change', () => {
-        setTranscribingMessage('Transcribing...');
+        setTranscribingMessage('Transcribing...')
 
-        const apiKey = localStorage.getItem('api-key');
-        const file = fileInput.files[0];
-        const language = document.querySelector('#language').value;
-        const response_format = document.querySelector('#response_format').value;
-        const response = transcribe(apiKey, file, language, response_format);
+        const apiKey = localStorage.getItem('api-key')
+        const file = fileInput.files[0]
+        const language = document.querySelector('#language').value
+        const response_format = document.querySelector('#response_format').value
+        const response = transcribe(apiKey, file, language, response_format)
 
         response.then(transcription => {
             if (response_format === 'json') {
-                setTranscribedTextBasedFormats(transcription.text);
+                setTranscribedTextBasedFormats(transcription.text)
             } else if (response_format === 'verbose_json') {
-                setTranscribedSegments(transcription.segments);
+                setTranscribedSegments(transcription.segments)
             } else {
-                setTranscribedTextBasedFormats(transcription);
+                setTranscribedTextBasedFormats(transcription)
             }
             fileInput.value = null; // Clear the file input
-        });
-    });
+        })
+    })
 })
