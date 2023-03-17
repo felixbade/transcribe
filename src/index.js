@@ -1,11 +1,10 @@
 const url = 'https://api.openai.com/v1/audio/transcriptions'
 
-
 const transcribe = (apiKey, file, language, response_format) => {
     const formData = new FormData()
     formData.append('file', file)
     formData.append('model', 'whisper-1')
-    formData.append('response_format', response_format || 'verbose_json') // Set default value to verbose_json
+    formData.append('response_format', response_format || 'verbose_json')
     if (language) {
         formData.append('language', language)
     }
