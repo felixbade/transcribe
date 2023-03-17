@@ -5,7 +5,7 @@ const transcribe = (apiKey, file, language) => {
     const formData = new FormData()
     formData.append('file', file)
     formData.append('model', 'whisper-1')
-    formData.append('response_format', 'verbose_json')
+    formData.append('response_format', response_format || 'verbose_json') // Set default value to verbose_json
     if (language) {
         formData.append('language', language)
     }
@@ -17,8 +17,21 @@ const transcribe = (apiKey, file, language) => {
         method: 'POST',
         body: formData,
         headers: headers
-    }).then(response => response.json())
-      .catch(error => console.error(error))
+    }).then(response => {
+        console.log(response)
+        // Automatically handle response format
+        if (response_format === 'json' || response_format === 'verbose_json') {
+            return response.json().then(data => {
+                console.log("JSON: ", JSON.stringify(data, null, 2));
+                return data;
+            });
+        } else {
+            return response.text().then(data => {
+                console.log("TEXT: ", data);
+                return data;
+            });
+        }
+    }).catch(error => console.error(error))
 }
 
 
@@ -63,9 +76,16 @@ const updateTextareaSize = (element) => {
     element.style.height = `${height}px`
 }
 
-const setTranscribedText = (text) => {
+const setTranscribingMessage = (text) => {
     const container = document.querySelector('#output')
     container.innerHTML = text
+}
+
+const setTranscribedTextBasedFormats = (text) => {
+    console.log(text)
+
+    const container = document.querySelector('#output')
+    container.innerHTML = '<pre>' + text + '</pre>' // Wrap the content in a <pre> tag
 }
 
 const setTranscribedSegments = (segments) => {
@@ -86,15 +106,22 @@ window.addEventListener('load', () => {
 
     const fileInput = document.querySelector('#audio-file')
     fileInput.addEventListener('change', () => {
-        setTranscribedText('Transcribing...')
-
-        const apiKey = localStorage.getItem('api-key')
-        const file = fileInput.files[0]
-        const language = document.querySelector('#language').value
-        const response = transcribe(apiKey, file, language)
-
+        setTranscribedTextBasedFormats('Transcribing...');
+    
+        const apiKey = localStorage.getItem('api-key');
+        const file = fileInput.files[0];
+        const language = document.querySelector('#language').value;
+        const response_format = document.querySelector('#response_format').value;
+        const response = transcribe(apiKey, file, language, response_format);
+    
         response.then(transcription => {
-            setTranscribedSegments(transcription.segments)
-        })
-    })
+            if (response_format === 'json') {
+                setTranscribedTextBasedFormats(transcription.text);
+            } else if (response_format === 'verbose_json') {
+                setTranscribedSegments(transcription.segments);
+            } else {
+                setTranscribedTextBasedFormats(transcription);
+            }
+        });
+    });    
 })
