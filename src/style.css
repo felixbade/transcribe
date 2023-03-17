@@ -1,22 +1,36 @@
 :root {
     --bg: white;
+    --compose-box-bg: hsl(0, 0%, 100%, 0.7);
     --fg: black;
     --my-message-bg: hsl(215, 90%, 50%);
     --my-message-fg: white;
-    --response-bg: hsl(0, 0%, 90%);
-    --link: hsl(220, 80%, 50%);
+    --response-bg: hsl(0, 0%, 91%);
+    --link: hsl(215, 100%, 45%);
     --input-border: hsla(0, 0%, 0%, 20%);
     --info: hsl(120, 50%, 80%);
     --info-link: hsl(210, 100%, 30%);
+    --error-fg: hsl(5, 70%, 50%);
+    --code-bg: hsla(0, 0%, 100%, 0.7);
+    --code-border: hsla(0, 0%, 0%, 0.15);
+    --my-message-code-bg: hsla(0, 0%, 0%, 0.2);
+    --my-message-code-border: hsla(0, 0%, 0%, 0.15);
+
+    --chat-max-width: 50em;
+}
+
+html {
+    -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
 }
 
 body {
     margin: 0;
     font-family: sans-serif;
-    line-height: 130%;
+    line-height: 135%;
     background-color: var(--bg);
     color: var(--fg);
     margin-bottom: calc(4em + env(safe-area-inset-bottom));
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
 }
 
 .container {
@@ -78,7 +92,7 @@ input[type=text], textarea {
     line-height: 120%;
     background-color: var(--bg);
     color: var(--fg);
-    border: 2px solid var(--input-border);
+    border: 1px solid var(--input-border);
     padding: 0.2em 0.5em;
     border-radius: 1em;
 }
@@ -107,6 +121,30 @@ label.button {
     font-size: 1em;
 }
 
+select {
+    font-family: -apple-system, sans-serif;
+    line-height: 120%;
+    background-color: var(--bg);
+    color: var(--fg);
+    border: 1px solid var(--input-border);
+    padding: 0.2em 0.5em;
+    border-radius: 1em;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 7'><path fill='%23666666' d='M5 6.8s-.1 0 0 0c-.1 0-.1 0 0 0L1 2.8 2.2 1.6 5 4.4 7.8 1.6 9 2.8z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.5em center;
+    background-size: 14px;
+    padding-right: 2em;
+    margin-top: 0.4em;
+    font-size: 1em;
+}
+
+select:focus {
+    outline: none;
+}
+
 .hidden {
     display: none !important;
 }
@@ -115,16 +153,27 @@ label.button {
     margin: 1em 0;
 }
 
+
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg: hsl(215, 20%, 10%);
+        --bg: hsl(215, 20%, 9%);
+        --compose-box-bg: hsl(215, 20%, 9%, 0.7);
         --fg: hsl(0, 0%, 95%);
-        --my-message-bg: hsl(215, 70%, 50%);
+        --my-message-bg: hsl(215, 75%, 48%);
         --my-message-fg: white;
-        --response-bg: hsl(215, 15%, 22%);
-        --link: hsl(220, 75%, 55%);
+        --response-bg: hsl(215, 15%, 20%);
+        --link: hsl(215, 100%, 65%);
         --input-border: hsla(0, 0%, 90%, 40%);
         --info: hsl(130, 30%, 25%);
         --info-link: hsl(220, 100%, 85%);
+        --error-fg: hsl(5, 70%, 60%);
+        --code-bg: hsla(0, 0%, 0%, 0.25);
+        --code-border: hsla(0, 0%, 0%, 0.15);
+        --my-message-code-bg: hsla(0, 0%, 0%, 0.25);
+        --my-message-code-border: hsla(0, 0%, 0%, 0.15);
+    }
+
+    * {
+        color-scheme: dark;
     }
 }
