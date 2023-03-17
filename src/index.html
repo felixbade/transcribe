@@ -79,9 +79,17 @@
                     <option value="vi">Vietnamese</option>
                     <option value="cy">Welsh</option>
                 </select>
+                <br />
+                <select id="response_format" name="response_format">
+                    <option value="verbose_json" selected>verbose_json</option>
+                    <option value="json">json</option>
+                    <option value="text">text</option>
+                    <option value="srt">srt</option>
+                    <option value="vtt">vtt</option>
+                </select><br />
                 <br>
                 <label for="audio-file" class="button">Choose an audio file</label>
-                <input type="file" accept="audio/*" id="audio-file" name="file" style="visibility:hidden;">
+                <input type="file" accept="audio/mp3, audio/mp4, audio/mpeg, audio/mpga, audio/m4a, audio/wav, audio/webm, video/mp4, video/mpeg, video/webm" id="audio-file" name="file" style="visibility:hidden;">
               </form>
             <div id="output"></div>
             <footer>
