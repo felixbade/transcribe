@@ -84,7 +84,12 @@ const setTranscribingMessage = (text) => {
 
 const setTranscribedPlainText = (text) => {
     console.log(text)
-    outputElement.innerHTML = '<pre>' + text + '</pre>' // Wrap the content in a <pre> tag
+
+    // outputElement.innerText creates unnecessary <br> elements
+    text = text.replaceAll('&', '&amp;')
+    text = text.replaceAll('<', '&lt;')
+    text = text.replaceAll('>', '&gt;')
+    outputElement.innerHTML = `<pre>${text}</pre>`
 }
 
 const setTranscribedSegments = (segments) => {
@@ -102,7 +107,6 @@ const setTranscribedSegments = (segments) => {
 window.addEventListener('load', () => {
     setupAPIKeyInput()
     outputElement = document.querySelector('#output')
-
 
     const fileInput = document.querySelector('#audio-file')
     fileInput.addEventListener('change', () => {
