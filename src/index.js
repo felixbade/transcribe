@@ -124,7 +124,9 @@ window.addEventListener('load', () => {
             } else {
                 setTranscribedPlainText(transcription)
             }
-            fileInput.value = null; // Clear the file input
+
+            // Allow multiple uploads without refreshing the page
+            fileInput.value = null
         })
     })
 })
